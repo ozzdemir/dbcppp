@@ -14,5 +14,6 @@ CTestTestfile.cmake
 /cmake-build-release/
 /src/Test/Config.h
 /CMakeSettings.json
+third_party/boost_1_72_0/
 build64
 output

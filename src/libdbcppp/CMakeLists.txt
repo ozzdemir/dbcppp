@@ -5,7 +5,7 @@ add_library(${PROJECT_NAME} SHARED "")
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} ${LIBXML2_LIBRARIES} "libxmlmm")
-
+add_dependencies(${PROJECT_NAME} unzip_boost_1_72)
 add_definitions(-DDBCPPP_EXPORT)
 
 include_directories(

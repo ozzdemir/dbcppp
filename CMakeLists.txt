@@ -11,7 +11,7 @@ if (!${Boost_USE_STATIC_LIBS})
 	add_definitions(-DBOOST_LOG_DYN_LINK)
 endif()
 
-find_package(Boost 1.72.0 REQUIRED COMPONENTS program_options)
+#find_package(Boost 1.72.0 REQUIRED COMPONENTS program_options)
 find_package(LibXml2 REQUIRED)
 #find_package(LLVM REQUIRED CONFIG)
 
@@ -21,6 +21,22 @@ find_package(LibXml2 REQUIRED)
 # Find the libraries that correspond to the LLVM components
 # that we wish to use
 #llvm_map_components_to_libnames(llvm_libs support core irreader mcjit jitlink native nativecodegen orcjit)
+
+# Download Boost 1.72
+set(BOOST_1_72_COMPRESSED_FILENAME "${CMAKE_BINARY_DIR}/boost_1_72_0.tar.bz2")
+set(BOOST_1_72_UNCOMPRESS_DIR "${CMAKE_SOURCE_DIR}/3rdparty/dbcppp/third_party/")
+set(BOOST_1_72_URL "https://sourceforge.net/projects/boost/files/boost/1.72.0/boost_1_72_0.tar.bz2/download")
+
+if(NOT EXISTS ${BOOST_1_72_COMPRESSED_FILENAME})
+  message("Downloading Boost 1.72.")
+  file(DOWNLOAD ${BOOST_1_72_URL} ${BOOST_1_72_COMPRESSED_FILENAME}
+       EXPECTED_MD5 cb40943d2a2cb8ce08d42bc48b0f84f0
+       SHOW_PROGRESS)
+endif()
+
+add_custom_target(unzip_boost_1_72 ALL
+    COMMAND if [ ! -f '${BOOST_1_72_UNCOMPRESS_DIR}/boost_1_72_0/b2' ]\; then tar -xvjf ${BOOST_1_72_COMPRESSED_FILENAME} --directory ${BOOST_1_72_UNCOMPRESS_DIR}\; cd ${BOOST_1_72_UNCOMPRESS_DIR}/boost_1_72_0/\; ./bootstrap.sh\; fi\;
+)
 
 if (Boost_FOUND)
 	include_directories(${Boost_INCLUDE_DIRS})
@@ -36,6 +52,7 @@ include_directories(${LLVM_INCLUDE_DIRS})
 include_directories("third_party")
 include_directories("include")
 include_directories("third_party/libxmlmm/include")
+include_directories("third_party/boost_1_72_0")
 
 #add_subdirectory(src) dbcppp fails due to gcc version, so build only the library, btw, isn't the main better suited as an example?
 add_subdirectory(src/libdbcppp)
