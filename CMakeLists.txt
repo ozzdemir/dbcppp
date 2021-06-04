@@ -23,8 +23,8 @@ find_package(LibXml2 REQUIRED)
 #llvm_map_components_to_libnames(llvm_libs support core irreader mcjit jitlink native nativecodegen orcjit)
 
 # Download Boost 1.72
-set(BOOST_1_72_COMPRESSED_FILENAME "${CMAKE_BINARY_DIR}/boost_1_72_0.tar.bz2")
-set(BOOST_1_72_UNCOMPRESS_DIR "${CMAKE_SOURCE_DIR}/3rdparty/dbcppp/third_party/")
+set(BOOST_1_72_COMPRESSED_FILENAME "${PROJECT_SOURCE_DIR}/third_party/boost_1_72_0.tar.bz2")
+set(BOOST_1_72_UNCOMPRESS_DIR "${PROJECT_SOURCE_DIR}/third_party/")
 set(BOOST_1_72_URL "https://sourceforge.net/projects/boost/files/boost/1.72.0/boost_1_72_0.tar.bz2/download")
 
 if(NOT EXISTS ${BOOST_1_72_COMPRESSED_FILENAME})
