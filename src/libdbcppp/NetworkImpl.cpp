@@ -323,7 +323,7 @@ bool NetworkImpl::operator!=(const INetwork& rhs) const
     return !(*this == rhs);
 }
 
-std::map<std::string, std::unique_ptr<INetwork>> INetwork::LoadNetworkFromFile(const std::filesystem::path& filename)
+std::map<std::string, std::unique_ptr<INetwork>> INetwork::LoadNetworkFromFile(const std::experimental::filesystem::path& filename)
 {
     auto result = std::map<std::string, std::unique_ptr<INetwork>>();
     auto is = std::ifstream(filename);
