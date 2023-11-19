@@ -5,7 +5,7 @@
 #    ifdef DBCPPP_EXPORT
 #        define DBCPPP_API __declspec(dllexport)
 #    else
-#        define DBCPPP_API __declspec(dllimport)
+#        define DBCPPP_API
 #    endif
 #else
 #   define DBCPPP_API

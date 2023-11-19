@@ -2,13 +2,17 @@
 include(GNUInstallDirs)
 include(TestBigEndian)
 
-add_library(${PROJECT_NAME} STATIC "")
+if(BUILD_SHARED_LIBS)
+  add_library(${PROJECT_NAME} SHARED "")
+  add_definitions(-DDBCPPP_EXPORT)
+else()
+  add_library(${PROJECT_NAME} STATIC "")
+endif()
+
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE TRUE)
 
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} ${LIBXML2_LIBRARIES} "libxmlmm")
-
-add_definitions(-DDBCPPP_EXPORT)
 
 include_directories(
     ${CMAKE_SOURCE_DIR}/src

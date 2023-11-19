@@ -5,6 +5,7 @@ project("libdbcppp" VERSION 0.1.0)
 
 option(build_tests "Build tests" OFF)
 option(build_examples "Build examples" OFF)
+option(build_main "Build main dbcppp executable" OFF)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
@@ -26,6 +27,8 @@ set(LIBXML2_WITH_LZMA OFF)
 set(LIBXML2_WITH_PYTHON OFF)
 set(LIBXML2_WITH_ZLIB OFF)
 set(LIBXML2_WITH_TESTS OFF)
+set(LIBXML2_WITH_PROGRAMS OFF)
+set(BUILD_SHARED_LIBS OFF)
 
 add_subdirectory(third-party/libxml2)
 
@@ -36,7 +39,7 @@ file(GLOB libxmlmm_src
     "third-party/libxmlmm/libxmlmm/*.cpp"
 )
 
-add_library(libxmlmm SHARED "")
+add_library(libxmlmm STATIC "")
 target_link_libraries(libxmlmm LibXml2)
 
 target_sources("libxmlmm"
@@ -70,6 +73,6 @@ CONFIGURE_FILE(
   IMMEDIATE @ONLY
 )
 
-ADD_CUSTOM_TARGET(uninstall
+ADD_CUSTOM_TARGET(${PROJECT_NAME}_uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
 )

@@ -1,3 +1,6 @@
 ﻿
 add_subdirectory(libdbcppp)
-add_subdirectory(dbcppp)
+if (build_main)
+  add_subdirectory(dbcppp)
+endif()
+
