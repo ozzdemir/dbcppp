@@ -40,6 +40,7 @@ file(GLOB libxmlmm_src
 )
 
 add_library(libxmlmm STATIC "")
+set_property(TARGET libxmlmm PROPERTY POSITION_INDEPENDENT_CODE TRUE)
 target_link_libraries(libxmlmm LibXml2)
 
 target_sources("libxmlmm"
